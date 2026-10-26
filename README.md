@@ -2,6 +2,8 @@
 
 A standalone logging, filesystem, parsing, and terminal utility library with a shared semantic API implemented independently in Python and C++.
 
+Auctor was developed by abstracting useful and common logic from Domus-AI [Domus-AI](https://github.com/nomadiidamon/Domus-AI).
+
 ## Components
 
 | Component | Purpose |
@@ -13,6 +15,10 @@ A standalone logging, filesystem, parsing, and terminal utility library with a s
 | Stylus | Colors, TTY, prompting, and spinner |
 
 Carmen moves information between the filesystem and memory; Scriptor interprets it in memory; Stylus mediates with the terminal; Livy records what happened.
+
+## Livy
+
+Livy is implemented in Python. See the [Livy README](python/src/Auctor/Livy/README.md), the [Livy documentation](docs/Livy.md) and the [Livy examples](examples/python/livy).
 
 ## Failure semantics
 
