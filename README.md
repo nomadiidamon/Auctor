@@ -2,7 +2,7 @@
 
 A standalone logging, filesystem, parsing, and terminal utility library with a shared semantic API implemented independently in Python and C++.
 
-Auctor was developed by abstracting useful and common logic from Domus-AI [Domus-AI](https://github.com/nomadiidamon/Domus-AI).
+Auctor was developed by abstracting useful and common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI).
 
 ## Components
 
