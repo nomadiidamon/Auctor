@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Auctor"
+dynamic = ["version"]
+description = "Auctor: Filesystem, parsing, terminal, and logging utilities."
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [
+    { name = "nomad_ii_damon" }
+]
+
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0"
+]
+
+[project.urls]
+homepage = "https://github.com/nomadiidamon/Auctor"
+
+[tool.setuptools.dynamic]
+version = { attr = "Auctor.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+
+# Where pytest looks for tests.
+testpaths = ["tests"]
+pythonpath = ["src", "tools"]
+
+# Standard test discovery patterns.
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+# Registered markers.
+markers = []
+
+# Fail loudly on unknown markers.
+addopts = "--strict-markers -ra"
