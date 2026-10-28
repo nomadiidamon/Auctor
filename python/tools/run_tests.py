@@ -1,14 +1,25 @@
-"""Run the Auctor test suite; currently delegates to Livy. Extra arguments go to pytest."""
+"""Run the Auctor test suite (Livy, then Stylus). Extra arguments go to pytest."""
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
+OUTPUT_FILE = TOOLS_DIR.parent / "tests" / "test_output.txt"
+SUITES = ["Livy", "Stylus"]
 
 
 def main() -> int:
     print("[Auctor] run tests")
-    return subprocess.call([sys.executable, str(TOOLS_DIR / "Livy" / "run_tests.py"), *sys.argv[1:]])
+    OUTPUT_FILE.write_text("", encoding="utf-8")
+    env = {**os.environ, "AUCTOR_TEST_APPEND": "1"}
+    rc = 0
+    for name in SUITES:
+        result = subprocess.call(
+            [sys.executable, str(TOOLS_DIR / name / "run_tests.py"), *sys.argv[1:]], env=env
+        )
+        rc = rc or result
+    return rc
 
 
 if __name__ == "__main__":

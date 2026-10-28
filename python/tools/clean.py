@@ -1,4 +1,4 @@
-"""Uninstall the editable Auctor package, then clean artifacts; currently delegates to Livy."""
+"""Uninstall the editable Auctor package, then clean artifacts; then delegate to Livy and Stylus."""
 import argparse
 import subprocess
 import sys
@@ -6,6 +6,7 @@ from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
 PACKAGE_NAME = "Auctor"
+CLEAN_TOOLS = ["Livy", "Stylus"]
 
 
 def main() -> int:
@@ -21,7 +22,11 @@ def main() -> int:
         subprocess.call([sys.executable, "-m", "pip", "uninstall", "-y", PACKAGE_NAME])
 
     forwarded = [flag for flag, on in (("--dry-run", args.dry_run), ("--yes", args.yes)) if on]
-    return subprocess.call([sys.executable, str(TOOLS_DIR / "Livy" / "clean.py"), *forwarded])
+    rc = 0
+    for name in CLEAN_TOOLS:
+        result = subprocess.call([sys.executable, str(TOOLS_DIR / name / "clean.py"), *forwarded])
+        rc = rc or result
+    return rc
 
 
 if __name__ == "__main__":

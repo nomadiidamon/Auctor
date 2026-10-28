@@ -15,7 +15,7 @@ htmlcov/
 venv/
 ## PyTest
 .pytest_cache/
-python/test_output.txt
+python/tests/test_output.txt
 ## VS Code settings
 .vscode/
 ## Build artifacts

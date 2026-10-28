@@ -14,7 +14,7 @@ DIR_SUFFIXES = (".egg-info",)
 PYTHON_ROOT_DIRS = {"build", "dist", ".eggs"}
 FILE_SUFFIXES = (".pyc", ".pyo")
 FILE_NAMES = {".coverage", "livy.log"}
-PYTHON_ROOT_FILES = {"test_output.txt"}
+PYTHON_ROOT_FILES = {PYTHON_DIR / "tests" / "test_output.txt"}
 
 # Never descend into these.
 SKIP_DIRS = {".git", ".venv", "venv", "node_modules"}
@@ -41,7 +41,7 @@ def find_artifacts() -> list[Path]:
             elif (
                 entry.name.endswith(FILE_SUFFIXES)
                 or entry.name in FILE_NAMES
-                or (entry.parent == PYTHON_DIR and entry.name in PYTHON_ROOT_FILES)
+                or entry in PYTHON_ROOT_FILES
             ):
                 found.append(entry)
 
