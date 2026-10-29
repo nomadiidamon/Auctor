@@ -33,7 +33,7 @@ def test_default_path_is_cwd(tmp_path, monkeypatch):
     assert (tmp_path / "livy.log").exists()
 
 
-def test_initialize_and_shutdown_are_idempotent(tmp_path):
+def test_initialize_and_shutdown_are_safe_to_repeat(tmp_path):
     livy = Livy(path=tmp_path)
     assert livy.initialize() and livy.initialize()
     livy.shutdown()

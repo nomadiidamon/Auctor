@@ -18,11 +18,11 @@ Carmen moves information between the filesystem and memory; Scriptor interprets 
 
 ## Livy
 
-Livy is implemented in Python. See the [Livy README](python/src/Auctor/Livy/README.md), the [Livy documentation](docs/Livy.md) and the [Livy examples](examples/python/livy).
+Livy is implemented in Python. See the [Livy documentation](docs/Livy.md).
 
 ## Stylus
 
-Stylus is being implemented in Python, starting with Colors; Spinner, Prompt and TTY follow. See the [Stylus README](python/src/Auctor/Stylus/README.md), the [Stylus documentation](docs/Stylus.md) and the [Stylus examples](examples/python/stylus).
+Stylus is being implemented in Python: Colors and Spinner are done; Prompt and TTY follow. See the [Stylus documentation](docs/Stylus.md).
 
 ## Failure semantics
 

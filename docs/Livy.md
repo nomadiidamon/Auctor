@@ -23,10 +23,10 @@ livy.is_initialized()  # True
 livy.shutdown()        # flush and close; safe to repeat
 ```
 
-- `initialize(path=None)` is idempotent. A path given here overrides the constructor path.
+- `initialize(path=None)` is safe to call repeatedly. A path given here overrides the constructor path.
 - A directory path (or a path with no extension) gets `livy.log` appended. A path with an extension is used as the log file. With no path, `livy.log` goes in the current working directory. Missing parent directories are created.
 - If the log cannot be opened, `initialize()` returns `False` and the reason is available from `get_last_failure()`.
-- `shutdown()` is idempotent.
+- `shutdown()` is safe to call repeatedly.
 - `with Livy(...) as livy:` initializes on entry and shuts down on exit.
 - Every initialized instance is tracked internally. `shutdown_all()` closes them all and is registered to run at interpreter exit.
 
