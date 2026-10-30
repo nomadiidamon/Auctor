@@ -6,7 +6,7 @@ from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
 OUTPUT_FILE = TOOLS_DIR.parent.parent / "tests" / "test_output.txt"
-SUBMODULES = ["Colors", "Spinner"]
+SUBMODULES = ["Colors", "Spinner", "Prompt"]
 
 
 def main() -> int:

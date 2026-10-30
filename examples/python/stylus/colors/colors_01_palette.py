@@ -1,5 +1,5 @@
 """
-@example 01_palette.py
+@example colors_01_palette.py
 Print every Colors constant by name, using its own escape sequence.
 """
 

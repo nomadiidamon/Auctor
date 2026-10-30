@@ -1,5 +1,5 @@
 """
-@example 02_style.py
+@example colors_02_style.py
 Wrap text with Style(); the reset sequence is appended automatically.
 """
 

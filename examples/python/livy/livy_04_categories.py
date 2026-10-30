@@ -1,5 +1,5 @@
 """
-@example 04_categories.py
+@example livy_04_categories.py
 Group messages under externally named categories.
 """
 

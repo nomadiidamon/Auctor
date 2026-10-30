@@ -1,5 +1,5 @@
 """
-@example 02_context.py
+@example spinner_02_context.py
 Use a spinner as a context manager and change its message while it runs.
 """
 

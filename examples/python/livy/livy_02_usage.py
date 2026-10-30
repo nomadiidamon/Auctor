@@ -1,5 +1,5 @@
 """
-@example 02_usage.py
+@example livy_02_usage.py
 Log at every level and attach context to a message.
 """
 

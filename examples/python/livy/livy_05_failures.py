@@ -1,5 +1,5 @@
 """
-@example 05_failures.py
+@example livy_05_failures.py
 Read the last failure from an instance and from a category.
 """
 

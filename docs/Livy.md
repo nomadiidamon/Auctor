@@ -86,11 +86,11 @@ importer.info("step complete", step=1)
 
 | Example | Shows |
 |---|---|
-| @ref 01_initialize.py "01_initialize.py" | Initialization with and without paths |
-| @ref 02_usage.py "02_usage.py" | Logging levels and context |
-| @ref 03_shutdown.py "03_shutdown.py" | Explicit, scoped and global shutdown |
-| @ref 04_categories.py "04_categories.py" | Categories |
-| @ref 05_failures.py "05_failures.py" | Instance and category failures |
+| @ref livy_01_initialize.py "livy_01_initialize.py" | Initialization with and without paths |
+| @ref livy_02_usage.py "livy_02_usage.py" | Logging levels and context |
+| @ref livy_03_shutdown.py "livy_03_shutdown.py" | Explicit, scoped and global shutdown |
+| @ref livy_04_categories.py "livy_04_categories.py" | Categories |
+| @ref livy_05_failures.py "livy_05_failures.py" | Instance and category failures |
 
 Sources are in `examples/python/livy/`.
 

@@ -1,5 +1,5 @@
 """
-@example 03_frames.py
+@example spinner_03_frames.py
 Choose frames in the constructor, or change them before or during a run.
 """
 

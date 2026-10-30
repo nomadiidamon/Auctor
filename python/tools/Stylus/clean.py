@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
-SUBMODULES = ["Colors", "Spinner"]
+SUBMODULES = ["Colors", "Spinner", "Prompt"]
 
 
 def main() -> int:

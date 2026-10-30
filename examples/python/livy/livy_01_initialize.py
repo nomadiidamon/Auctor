@@ -1,5 +1,5 @@
 """
-@example 01_initialize.py
+@example livy_01_initialize.py
 Initialize a Livy instance, with an explicit path and with the defaults.
 """
 

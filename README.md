@@ -22,7 +22,7 @@ Livy is implemented in Python. See the [Livy documentation](docs/Livy.md).
 
 ## Stylus
 
-Stylus is being implemented in Python: Colors and Spinner are done; Prompt and TTY follow. See the [Stylus documentation](docs/Stylus.md).
+Stylus is being implemented in Python: Colors, Spinner and Prompt are done; TTY follows. See the [Stylus documentation](docs/Stylus.md).
 
 ## Failure semantics
 

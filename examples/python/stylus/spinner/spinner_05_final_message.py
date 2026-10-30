@@ -1,5 +1,5 @@
 """
-@example 05_final_message.py
+@example spinner_05_final_message.py
 Write a final message with the total time spun, and read the timer directly.
 """
 

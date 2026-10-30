@@ -8,7 +8,7 @@ Stylus is Auctor's terminal utility group. Each subsection is its own subpackage
 |---|---|---|
 | `Colors` | ANSI escape sequences and `Style()` | Implemented |
 | `Spinner` | Background progress animation | Implemented |
-| `Prompt` | Interactive prompting | Planned |
+| `Prompt` | Interactive prompting | Implemented |
 | `TTY` | Terminal-state detection | Planned |
 
 ## Quick start

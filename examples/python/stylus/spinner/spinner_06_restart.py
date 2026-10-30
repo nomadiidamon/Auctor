@@ -1,5 +1,5 @@
 """
-@example 06_restart.py
+@example spinner_06_restart.py
 Stop a spinner around other output and restart it with its configuration kept.
 """
 

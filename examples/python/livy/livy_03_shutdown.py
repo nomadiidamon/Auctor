@@ -1,5 +1,5 @@
 """
-@example 03_shutdown.py
+@example livy_03_shutdown.py
 Shut Livy down explicitly, with a context manager, and for every instance at once.
 """
 

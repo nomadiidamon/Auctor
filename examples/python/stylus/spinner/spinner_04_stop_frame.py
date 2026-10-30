@@ -1,5 +1,5 @@
 """
-@example 04_stop_frame.py
+@example spinner_04_stop_frame.py
 Leave a consistent final frame behind instead of a blank line.
 """
 

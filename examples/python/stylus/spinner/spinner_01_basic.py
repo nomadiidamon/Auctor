@@ -1,5 +1,5 @@
 """
-@example 01_basic.py
+@example spinner_01_basic.py
 Start a spinner, let it run, and stop it; stopping clears the line.
 """
 

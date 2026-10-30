@@ -6,10 +6,10 @@ Stylus is Auctor's terminal-facing utility group: colors, TTY state, prompting a
 |---|---|---|
 | Colors | ANSI escape sequences and text styling | Implemented |
 | Spinner | Background progress animation | Implemented |
-| Prompt | Interactive terminal prompting | Planned |
+| Prompt | Interactive terminal prompting | Implemented |
 | TTY | Terminal-state detection | Planned |
 
-Everything is importable from `Auctor.Stylus`; each subsection is its own subpackage (`Auctor.Stylus.Colors`, `Auctor.Stylus.Spinner`).
+Everything is importable from `Auctor.Stylus`; each subsection is its own subpackage (`Auctor.Stylus.Colors`, `Auctor.Stylus.Spinner`, `Auctor.Stylus.Prompt`).
 
 ## Colors
 
@@ -59,8 +59,8 @@ print(Style("combined", Colors.BOLD, Colors.OKCYAN))
 
 | Example | Shows |
 |---|---|
-| @ref 01_palette.py "01_palette.py" | Every constant printed in its own color |
-| @ref 02_style.py "02_style.py" | Wrapping text with `Style()` |
+| @ref colors_01_palette.py "colors_01_palette.py" | Every constant printed in its own color |
+| @ref colors_02_style.py "colors_02_style.py" | Wrapping text with `Style()` |
 
 Sources are in `examples/python/stylus/colors/`.
 
@@ -130,15 +130,73 @@ When the spinner stops with a stop frame, a final message, or both, it writes th
 
 | Example | Shows |
 |---|---|
-| @ref 01_basic.py "01_basic.py" | Start and stop, repeated calls |
-| @ref 02_context.py "02_context.py" | Context manager and `update()` |
-| @ref 03_frames.py "03_frames.py" | Custom frames, changed before and during a run |
-| @ref 04_stop_frame.py "04_stop_frame.py" | A consistent final frame |
-| @ref 05_final_message.py "05_final_message.py" | Final message with elapsed time |
-| @ref 06_restart.py "06_restart.py" | Stopping around other output and restarting |
+| @ref spinner_01_basic.py "spinner_01_basic.py" | Start and stop, repeated calls |
+| @ref spinner_02_context.py "spinner_02_context.py" | Context manager and `update()` |
+| @ref spinner_03_frames.py "spinner_03_frames.py" | Custom frames, changed before and during a run |
+| @ref spinner_04_stop_frame.py "spinner_04_stop_frame.py" | A consistent final frame |
+| @ref spinner_05_final_message.py "spinner_05_final_message.py" | Final message with elapsed time |
+| @ref spinner_06_restart.py "spinner_06_restart.py" | Stopping around other output and restarting |
 
 Sources are in `examples/python/stylus/spinner/`.
 
 ### Tests
 
 Tests live in `python/tests/Stylus/Spinner/`. Run them with `python/scripts/Stylus/Spinner/run_tests.bat` or `.sh`, or `python python/tools/Stylus/Spinner/run_tests.py`.
+
+## Prompt
+
+`Prompt` asks questions on the terminal: free text, yes/no and a choice from a list. Cancelling is an expected outcome, never an exception.
+
+### Package layout
+
+| Module | Contents |
+|---|---|
+| `Auctor/Stylus/Prompt/prompt.py` | `Prompt` |
+
+`Prompt` is the class and `Auctor.Stylus.Prompt` is the subpackage. Import the class with `from Auctor.Stylus.Prompt import Prompt`.
+
+### Construction
+
+```python
+Prompt(*, color="", endc="", stream=None, input_stream=None)
+```
+
+| Argument | Meaning |
+|---|---|
+| `color`, `endc` | Escape sequences written before and after the question text |
+| `stream` | Output stream; defaults to `sys.stdout` at call time |
+| `input_stream` | Input stream read one line at a time; defaults to `sys.stdin` at call time |
+
+Passing both streams makes a prompt scriptable, which is how the tests and examples run without a terminal.
+
+### Operations
+
+| Operation | Returns | Behaviour |
+|---|---|---|
+| `ask(message, default=None)` | `str` or `None` | Reads a line. An empty answer returns `default`, or `""` without one. |
+| `confirm(message, default=False)` | `bool` | Accepts `y`, `yes`, `n`, `no` in any case. An empty answer returns `default`; anything else asks again. |
+| `select(message, options, default=None)` | `str` or `None` | Lists the options numbered from 1. The answer is a number or the option text (any case). Invalid answers ask again; an empty answer returns `default`, or asks again without one. |
+
+Answers are stripped of surrounding whitespace.
+
+### Cancelling and errors
+
+- End of input, Ctrl-C, or a closed or broken stream cancels the prompt: `ask` and `select` return `None`, and `confirm` returns `False` even when its default is `True`.
+- A cancelled prompt writes a newline so the cursor is left on a fresh line.
+- `select` raises `ValueError` for empty or non-string `options`, or a `default` that is not one of them. These are programming errors, not user input.
+
+### Examples
+
+| Example | Shows |
+|---|---|
+| @ref prompt_01_ask.py "prompt_01_ask.py" | Text input with and without a default |
+| @ref prompt_02_confirm.py "prompt_02_confirm.py" | Yes/no questions and re-prompting |
+| @ref prompt_03_select.py "prompt_03_select.py" | Choosing by number, by name, and by default |
+| @ref prompt_04_cancel.py "prompt_04_cancel.py" | Cancelling with end of input |
+| @ref prompt_05_styled.py "prompt_05_styled.py" | Colored questions |
+
+Sources are in `examples/python/stylus/prompt/`. Examples script their answers through `input_stream` so they never wait on a terminal.
+
+### Tests
+
+Tests live in `python/tests/Stylus/Prompt/`. Run them with `python/scripts/Stylus/Prompt/run_tests.bat` or `.sh`, or `python python/tools/Stylus/Prompt/run_tests.py`.
