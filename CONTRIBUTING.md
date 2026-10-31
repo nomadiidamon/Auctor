@@ -12,20 +12,18 @@ All contributors are expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md
 
 This repository separates **implementation** from **shared semantics and concepts**:
 
-- **Shared concepts and semantics** live in [`docs/concepts.md`](docs/concepts.md) and [`docs/semantics.md`](docs/semantics.md). They define what the project is and the behavior every implementation must uphold.
+- **Shared concepts and semantics** live in [`docs/Concepts.md`](docs/Concepts.md) and [`docs/Semantics.md`](docs/Semantics.md). They define what the project is and the behavior every implementation must uphold.
 - **Implementations** live in independent trees, each with its own idiomatic tooling:
   - [`cpp/`](cpp/) - not yet implemented.
-  - [`python/`](python/) - packaged with `pyproject.toml`. See [`docs/python/README.md`](docs/python/README.md).
-- **Shared metadata** (version, contributors, etc.) lives once in [`project.ini`](project.ini).
+  - [`python/`](python/) - packaged with [`python/pyproject.toml`](python/pyproject.toml); source is under `python/src/` and tests under `python/tests/`.
 - **Examples** mirror the language split under [`examples/`](examples/).
 
-See [`docs/architecture.md`](docs/architecture.md) for the full layout.
+See [`docs/Architecture.md`](docs/Architecture.md) for the full layout.
 
 ### Ground Rules
 
-- A change to behavior starts in `docs/semantics.md` (or `docs/concepts.md`), then is applied to every implementation. If you only touch one language, say so in your PR and open a follow-up issue for the other.
+- A change to behavior starts in [`docs/Semantics.md`](docs/Semantics.md) (or [`docs/Concepts.md`](docs/Concepts.md)), then is applied to every implementation. If you only touch one language, say so in your PR and open a follow-up issue for the other.
 - Do not introduce cross-language build dependencies. Each language keeps its native tooling.
-- Do not duplicate project-wide metadata; update `project.ini`.
 - Keep docs and examples in the matching language subtree.
 
 ## Getting Started
@@ -53,16 +51,29 @@ Not yet implemented.
 
 ### Python
 
-Python 3.9 or newer is required. From the `python/` directory, create a virtual environment and install the package in editable mode **with the `dev` extra**, which installs the development dependencies (pytest, linters/formatters, etc.) defined under `[project.optional-dependencies]` in `python/pyproject.toml`:
+Python 3.10 or newer is required. From the repository root, create a virtual environment in `python/`, then activate it:
 
 ```bash
 cd python
 python -m venv .venv
-# Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
-pip install -e ".[dev]"
 ```
 
-Run the tests with `pytest`.
+Activate the environment using the command for your shell:
+
+```text
+Windows PowerShell: .\.venv\Scripts\Activate.ps1
+Windows Command Prompt: .venv\Scripts\activate.bat
+macOS/Linux: source .venv/bin/activate
+```
+
+With the environment active and the working directory still set to `python/`, install the package and its development dependency, then run the test suite:
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest
+```
+
+The `dev` extra currently installs pytest. These commands use the package's configured test discovery and do not install linters or formatters.
 
 ## Naming Conventions
 
@@ -105,5 +116,5 @@ Equivalent public concepts should be recognizably the same across implementation
 - Comment only where the code cannot explain itself, such as complex logic or non-obvious constraints.
 - Keep code modular and reusable; avoid duplication.
 - Write unit tests for new features and bug fixes in each affected implementation.
-- Ensure behavior matches [`docs/semantics.md`](docs/semantics.md).
+- Ensure behavior matches [`docs/Semantics.md`](docs/Semantics.md).
 - Update docs and examples when public behavior changes.

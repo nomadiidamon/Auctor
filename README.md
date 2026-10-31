@@ -1,61 +1,32 @@
 # Auctor
 
-A standalone logging, filesystem, parsing, and terminal utility library with a shared semantic API implemented independently in Python and C++.
+Auctor is a standalone library of reusable logging, filesystem, parsing, and terminal utilities. It separates these responsibilities into components that can be used independently and is designed around a shared semantic contract with idiomatic Python and C++ implementations.
 
-Auctor was developed by abstracting useful and common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI).
+Auctor was developed by extracting common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI), but it has no dependency on that project or its application-specific policies.
 
-## Components
+## Documentation
 
-| Component | Purpose |
-|---|---|
-| Runtime | Initializes and shuts down Auctor-wide infrastructure |
-| Livy | Logging, diagnostics, categories, last-failure tracking |
-| Carmen | Filesystem interaction: Cicero (read), Ovid (write), Herodotus (discovery, mutation, operation history) |
-| Scriptor | JSON, configuration, parsing, and fenced blocks |
-| Stylus | Colors, TTY, prompting, and spinner |
+- [Architecture](docs/Architecture.md): components, submodules, boundaries, repository layout, and implementation status.
+- [Concepts](docs/Concepts.md): language-independent design and cross-language API approach.
+- [Semantics](docs/Semantics.md): expected failure values, programming errors, and diagnostic responsibilities.
+- [Livy](docs/Livy.md): Python logging and diagnostics reference.
+- [Stylus](docs/Stylus.md): Python terminal utility reference.
 
-Carmen moves information between the filesystem and memory; Scriptor interprets it in memory; Stylus mediates with the terminal; Livy records what happened.
+## Project status
 
-## Livy
-
-Livy is implemented in Python. See the [Livy documentation](docs/Livy.md).
-
-## Stylus
-
-Stylus is being implemented in Python: Colors, Spinner and Prompt are done; TTY follows. See the [Stylus documentation](docs/Stylus.md).
-
-## Failure semantics
-
-- Expected read/discovery/parse failures return `None` or an empty value.
-- Expected mutation failures return `False`.
-- Programming errors raise exceptions.
-
-## Layout
-
-```text
-python/     Python package and tests
-cpp/        C++ implementation (Premake 5, planned)
-examples/   Python and C++ examples
-docs/       Documentation
-```
+The Python package is the current implementation. Livy and Stylus Colors, Prompt, and Spinner are implemented; other Python component namespaces are skeletal or planned. The `cpp/` directory is reserved for the planned C++ implementation and is currently empty. See [Architecture](docs/Architecture.md) for the component-by-component status.
 
 ## Python
+
+The current Python package requires Python 3.10 or newer. It is not yet published on PyPI; install it from the repository:
 
 ```bash
 cd python
 pip install -e .
 ```
 
-Requires Python 3.10+.
+For the development environment and test setup, see [Contributing: Development Setup](CONTRIBUTING.md#development-setup).
 
-### Development
+Examples are under `examples/python/`; component-specific references include their example and test locations.
 
-```bash
-cd python
-pip install -e ".[dev]"
-pytest
-```
-
-## Status
-
-Early development.
+See [CONTRIBUTING](CONTRIBUTING.md) for development guidance.

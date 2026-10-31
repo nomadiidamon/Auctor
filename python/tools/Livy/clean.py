@@ -10,13 +10,13 @@ REPO_ROOT = PYTHON_DIR.parent
 # Directory names removed wherever they appear.
 DIR_NAMES = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "htmlcov", ".hypothesis"}
 DIR_SUFFIXES = (".egg-info",)
-# Only removed directly under python/ so unrelated build/ dirs (e.g. C++) are untouched.
-PYTHON_ROOT_DIRS = {"build", "dist", ".eggs"}
+# Only removed directly under python/ so unrelated directories elsewhere are untouched.
+PYTHON_ROOT_DIRS = {"build", "dist", ".eggs", ".venv"}
 FILE_SUFFIXES = (".pyc", ".pyo")
 FILE_NAMES = {".coverage", "livy.log"}
 PYTHON_ROOT_FILES = {PYTHON_DIR / "tests" / "test_output.txt"}
 
-# Never descend into these.
+# Never descend into these, except for the project environment which is a cleanup target.
 SKIP_DIRS = {".git", ".venv", "venv", "node_modules"}
 
 
@@ -28,7 +28,7 @@ def find_artifacts() -> list[Path]:
             if entry.is_symlink():
                 continue
             if entry.is_dir():
-                if entry.name in SKIP_DIRS:
+                if entry.name in SKIP_DIRS and entry != PYTHON_DIR / ".venv":
                     continue
                 if (
                     entry.name in DIR_NAMES
