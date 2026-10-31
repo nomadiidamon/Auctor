@@ -19,12 +19,7 @@ The Python package is the current implementation. Livy and Stylus Colors, Prompt
 
 ## Python
 
-The current Python package requires Python 3.10 or newer. It is not yet published on PyPI; install it from the repository:
-
-```bash
-cd python
-pip install -e .
-```
+The current Python package requires Python 3.10 or newer. It is not yet published on PyPI.
 
 For the development environment and test setup, see [Contributing: Development Setup](CONTRIBUTING.md#development-setup).
 
