@@ -6,7 +6,7 @@ from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
 PACKAGE_NAME = "Auctor"
-CLEAN_TOOLS = ["Livy", "Stylus"]
+CLEAN_TOOLS = ["Auctor", "Runtime", "Livy", "Stylus"]
 
 
 def main() -> int:

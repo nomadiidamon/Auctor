@@ -9,12 +9,13 @@ Auctor was developed by extracting common logic from [Domus-AI](https://github.c
 - [Architecture](docs/Architecture.md): components, submodules, boundaries, repository layout, and implementation status.
 - [Concepts](docs/Concepts.md): language-independent design and cross-language API approach.
 - [Semantics](docs/Semantics.md): expected failure values, programming errors, and diagnostic responsibilities.
+- [Runtime](docs/Runtime.md): package environment defaults and Runtime settings.
 - [Livy](docs/Livy.md): Python logging and diagnostics reference.
 - [Stylus](docs/Stylus.md): Python terminal utility reference.
 
 ## Project status
 
-The Python package is the current implementation. Livy and Stylus Colors, Prompt, and Spinner are implemented; other Python component namespaces are skeletal or planned. The `cpp/` directory is reserved for the planned C++ implementation and is currently empty. See [Architecture](docs/Architecture.md) for the component-by-component status.
+The Python package is the current implementation. Livy and Stylus Colors, Prompt, Spinner, and TTY are implemented. Runtime provides package environment-default aggregation; broader Runtime lifecycle, Carmen, and Scriptor features remain planned or skeletal. The `cpp/` directory is reserved for the planned C++ implementation and is currently empty. See [Architecture](docs/Architecture.md) for component status.
 
 ## Python
 
@@ -28,5 +29,6 @@ pip install -e .
 For the development environment and test setup, see [Contributing: Development Setup](CONTRIBUTING.md#development-setup).
 
 Examples are under `examples/python/`; component-specific references include their example and test locations.
+Examples are under `examples/python/`; component-specific references include their example and test locations. Auctor defaults examples are in [examples/python/auctor](examples/python/auctor), and Runtime lifecycle/settings examples are in [examples/python/runtime](examples/python/runtime).
 
 See [CONTRIBUTING](CONTRIBUTING.md) for development guidance.

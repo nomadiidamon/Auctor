@@ -22,13 +22,13 @@ Return types use each language's normal vocabulary while preserving the same sem
 - **Scriptor is interpretation.** It parses, serializes, and recognizes structured content in memory; it does not own file access.
 - **Stylus is terminal interaction.** It handles terminal-oriented presentation and input without imposing application workflow.
 - **Livy is diagnostics.** A Livy instance owns its logging and last-failure context; it is not a factory for a global logger.
-- **Runtime is lifecycle coordination.** It initializes and shuts down infrastructure that needs process-level coordination.
+- **Runtime is lifecycle and package-settings coordination.** It aggregates namespaced package defaults into an Auctor-owned mapping and coordinates infrastructure lifecycle; it does not modify process-global `os.environ`.
 
 The intended flow is to compose these responsibilities: read data with Carmen, interpret it with Scriptor, present or request input with Stylus, and record diagnostics with Livy. Applications remain responsible for their own policies and decisions.
 
 ## Generic, not domain-specific
 
-Auctor APIs should describe reusable operations rather than encode meanings from a consuming application. Configuration access, for example, can read or set a key without knowing what that key means. Category names are selected by consumers. A filesystem root provides context but does not grant or restrict authority.
+Auctor APIs should describe reusable operations rather than encode meanings from a consuming application. Configuration access can read or set a key without knowing what it means. Runtime owns namespaced package defaults and their in-memory values; Scriptor.Config will provide file persistence later. Category names are selected by consumers. A filesystem root provides context but does not grant or restrict authority.
 
 This separation keeps the package useful outside its source project and allows each component to be adopted independently.
 
@@ -36,4 +36,5 @@ This separation keeps the package useful outside its source project and allows e
 
 - [Architecture](Architecture.md) describes the component tree, module boundaries, repository layout, and implementation status.
 - [Semantics](Semantics.md) describes the shared failure contract.
+- [Runtime](Runtime.md) documents package-default aggregation and Runtime-owned settings.
 - [Livy](Livy.md) and [Stylus](Stylus.md) describe their current Python APIs.

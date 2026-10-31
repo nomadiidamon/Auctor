@@ -6,6 +6,7 @@ Auctor is a standalone utility library for filesystem operations, data interpret
 
 ```text
 Auctor
+├── EnvironmentDefaults
 ├── Runtime
 ├── Livy
 ├── Carmen
@@ -26,11 +27,14 @@ Auctor
 
 | Component | Responsibility | Submodules |
 |---|---|---|
-| Runtime | Initialize and shut down runtime-managed infrastructure | Livy and, as implemented, future managed services |
+| EnvironmentDefaults | Declare immutable, namespaced package settings | Root contract for package default providers |
+| Runtime | Aggregate package defaults and coordinate lifecycle | Environment mapping; other managed services as implemented |
 | Livy | Logging, categories, diagnostics, and last-failure tracking | `Livy`, `Category`, `Failure` |
 | Carmen | Move information between the filesystem and memory | Cicero (read), Ovid (write), Herodotus (discovery, mutation, and operation history) |
 | Scriptor | Interpret and transform information in memory | JSON, Config, Parsing, Fences |
 | Stylus | Provide terminal-facing utilities | Colors, TTY, Prompt, Spinner |
+
+Package settings stay Auctor-owned. Runtime aggregates package defaults into a namespaced in-memory mapping; Scriptor.Config will provide file persistence later.
 
 The architectural boundary is: **Carmen moves information between the filesystem and memory; Scriptor interprets it in memory; Stylus mediates with the terminal; Livy records what happened.** Runtime coordinates lifecycle rather than owning those domain responsibilities.
 
@@ -59,6 +63,7 @@ The Python package source is under `python/src/Auctor/`:
 
 ```text
 Auctor/
+├── environment.py
 ├── Runtime/
 ├── Livy/
 ├── Carmen/
@@ -80,15 +85,16 @@ The repository is designed for independent Python and C++ implementations of a s
 | Area | Python | C++ |
 |---|---|---|
 | Livy | Implemented | Planned |
-| Stylus Colors, Prompt, Spinner | Implemented | Planned |
-| Stylus TTY | Planned | Planned |
-| Carmen, Scriptor, Runtime integration | Planned or skeletal package namespaces | Planned |
+| Runtime environment defaults | Implemented | Planned |
+| Stylus Colors, Prompt, Spinner, TTY | Implemented | Planned |
+| Carmen, Scriptor, broader Runtime lifecycle | Planned or skeletal package namespaces | Planned |
 
-The `cpp/` directory is currently empty. The implemented Python Livy and Stylus APIs are documented in [Livy](Livy.md) and [Stylus](Stylus.md). Those references describe current behavior; this architecture describes the broader component model.
+The `cpp/` directory is currently empty. The implemented Python Runtime settings, Livy, and Stylus APIs are documented in [Runtime](Runtime.md), [Livy](Livy.md), and [Stylus](Stylus.md). Those references describe current behavior; this architecture describes the broader component model.
 
 ## Further reading
 
 - [Concepts](Concepts.md) explains the cross-language API approach and language-independent design ideas.
 - [Semantics](Semantics.md) defines expected failures and the shared behavioral contract.
+- [Runtime](Runtime.md) documents package environment defaults and current Runtime settings.
 - [Livy](Livy.md) documents the implemented Python logging and diagnostics API.
 - [Stylus](Stylus.md) documents the implemented Python terminal utilities.

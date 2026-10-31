@@ -7,9 +7,9 @@ Stylus is Auctor's terminal-facing utility group: colors, TTY state, prompting a
 | Colors | ANSI escape sequences and text styling | Implemented |
 | Spinner | Background progress animation | Implemented |
 | Prompt | Interactive terminal prompting | Implemented |
-| TTY | Terminal-state detection | Planned |
+| TTY | Terminal-state detection and dimensions | Implemented |
 
-Everything is importable from `Auctor.Stylus`; each subsection is its own subpackage (`Auctor.Stylus.Colors`, `Auctor.Stylus.Spinner`, `Auctor.Stylus.Prompt`).
+Everything is importable from `Auctor.Stylus`; each subsection is its own subpackage (`Auctor.Stylus.Colors`, `Auctor.Stylus.Spinner`, `Auctor.Stylus.Prompt`, `Auctor.Stylus.TTY`).
 
 ## Colors
 
@@ -53,7 +53,7 @@ print(Style("combined", Colors.BOLD, Colors.OKCYAN))
 - `Style(text, *codes)` returns the codes, then the text, then `ENDC`.
 - With no codes the text is returned unchanged, without a reset.
 - Empty text is still wrapped.
-- Codes are not removed when the output is not a terminal. Detecting that is planned for TTY.
+- TTY can report whether the stream supports color. Colors does not automatically remove codes when the output is not a terminal.
 
 ### Examples
 
@@ -67,6 +67,8 @@ Sources are in `examples/python/stylus/colors/`.
 ### Tests
 
 Tests live in `python/tests/Stylus/Colors/`. Run them with `python/scripts/Stylus/Colors/run_tests.bat` or `.sh`, or `python python/tools/Stylus/Colors/run_tests.py`. `python/tools/Stylus/run_tests.py` runs every Stylus subsection.
+
+---------------------------------------------------------------------------
 
 ## Spinner
 
@@ -143,6 +145,8 @@ Sources are in `examples/python/stylus/spinner/`.
 
 Tests live in `python/tests/Stylus/Spinner/`. Run them with `python/scripts/Stylus/Spinner/run_tests.bat` or `.sh`, or `python python/tools/Stylus/Spinner/run_tests.py`.
 
+---------------------------------------------------------------------------
+
 ## Prompt
 
 `Prompt` asks questions on the terminal: free text, yes/no and a choice from a list. Cancelling is an expected outcome, never an exception.
@@ -200,3 +204,60 @@ Sources are in `examples/python/stylus/prompt/`. Examples script their answers t
 ### Tests
 
 Tests live in `python/tests/Stylus/Prompt/`. Run them with `python/scripts/Stylus/Prompt/run_tests.bat` or `.sh`, or `python python/tools/Stylus/Prompt/run_tests.py`.
+
+---------------------------------------------------------------------------
+
+## TTY
+
+`TTY` reports whether a stream is attached to a terminal, whether color output is supported, and the terminal dimensions when available. It obtains a snapshot of `Stylus.TTY` settings from Runtime when constructed; it does not use process-global `os.environ` as shared storage.
+
+### Package layout
+
+| Module | Contents |
+|---|---|
+| `Auctor/Stylus/TTY/tty.py` | `TTY` |
+| `Auctor/Stylus/TTY/environment.py` | `TTYEnvironmentDefaults` |
+
+Import with `from Auctor.Stylus.TTY import TTY`.
+
+### Settings
+
+| Key | Default | Meaning |
+|---|---:|---|
+| `Stylus.TTY.FORCE_COLOR` | `False` | Report color support even if output is redirected |
+| `Stylus.TTY.NO_COLOR` | `False` | Disable color support |
+| `Stylus.TTY.TERM` | `""` | `"dumb"` disables color support |
+
+Runtime aggregates package defaults in an Auctor-owned mapping. In-memory user overrides take precedence. File overrides are planned for when Scriptor.Config is implemented. A TTY instance takes a settings snapshot at construction; later Runtime changes apply to new instances.
+
+### Operations
+
+```python
+from Auctor.Stylus.TTY import TTY
+
+terminal = TTY()
+print(terminal.is_tty())
+print(terminal.supports_color())
+print(terminal.get_size())
+```
+
+- `TTY(stream=None)` uses the supplied output stream, or resolves `sys.stdout` when a method is called.
+- `is_tty()` returns `False` if `isatty()` is absent or the check fails.
+- `supports_color()` honors `FORCE_COLOR` first, including redirected streams. Otherwise, `NO_COLOR` or `TERM="dumb"` disables color; without those settings, the stream must be a TTY.
+- On Windows, TTY enables virtual-terminal processing for console streams when necessary while preserving existing mode flags. If that fails, color is unsupported.
+- `get_size()` returns an `os.terminal_size`, or `None` if the stream is not a TTY or its dimensions are unavailable.
+- TTY reports capability only. Colors, Prompt and Spinner do not automatically remove ANSI codes.
+
+### Examples
+
+| Example | Shows |
+|---|---|
+| @ref tty_01_terminal.py "tty_01_terminal.py" | Terminal attachment and color support |
+| @ref tty_02_override.py "tty_02_override.py" | An Auctor-owned in-memory override |
+| @ref tty_03_size.py "tty_03_size.py" | Terminal dimensions when available |
+
+Sources are in `examples/python/stylus/tty/`.
+
+### Tests
+
+Tests live in `python/tests/Stylus/TTY/`. Run them with `python/scripts/Stylus/TTY/run_tests.bat` or `.sh`, or `python python/tools/Stylus/TTY/run_tests.py`.
