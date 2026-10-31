@@ -6,23 +6,23 @@ Auctor is a standalone utility library for filesystem operations, data interpret
 
 ```text
 Auctor
-├── EnvironmentDefaults
-├── Runtime
-├── Livy
-├── Carmen
-│   ├── Cicero
-│   ├── Ovid
-│   └── Herodotus
-├── Scriptor
-│   ├── JSON
-│   ├── Config
-│   ├── Parsing
-│   └── Fences
-└── Stylus
-    ├── Colors
-    ├── TTY
-    ├── Prompt
-    └── Spinner
+|-- EnvironmentDefaults
+|-- Runtime
+|-- Livy
+|-- Carmen
+|   |-- Cicero
+|   |-- Ovid
+|   `-- Herodotus
+|-- Scriptor
+|   |-- JSON
+|   |-- Config
+|   |-- Parsing
+|   `-- Fences
+`-- Stylus
+    |-- Colors
+    |-- TTY
+    |-- Prompt
+    `-- Spinner
 ```
 
 | Component | Responsibility | Submodules |
@@ -63,19 +63,19 @@ The Python package source is under `python/src/Auctor/`:
 
 ```text
 Auctor/
-├── environment.py
-├── Runtime/
-├── Livy/
-├── Carmen/
-│   ├── Cicero/
-│   ├── Ovid/
-│   └── Herodotus/
-├── Scriptor/
-└── Stylus/
-    ├── Colors/
-    ├── TTY/
-    ├── Prompt/
-    └── Spinner/
+|-- environment.py
+|-- Runtime/
+|-- Livy/
+|-- Carmen/
+|   |-- Cicero/
+|   |-- Ovid/
+|   `-- Herodotus/
+|-- Scriptor/
+`-- Stylus/
+    |-- Colors/
+    |-- TTY/
+    |-- Prompt/
+    `-- Spinner/
 ```
 
 ## Implementation status
