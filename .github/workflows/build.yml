@@ -106,7 +106,7 @@ jobs:
           set -euo pipefail
           echo "Validating generated distributions..."
           ls -lh dist/
-          python -m twine check --verbose dist/*
+          python -m twine check dist/*
         working-directory: python
 
       - name: Upload distributions
