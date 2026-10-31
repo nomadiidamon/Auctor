@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 TOOLS_DIR = Path(__file__).resolve().parent
-PACKAGE_NAME = "Auctor"
+PACKAGE_NAME = "auctor-utils"
 CLEAN_TOOLS = ["Auctor", "Runtime", "Livy", "Stylus"]
 
 
