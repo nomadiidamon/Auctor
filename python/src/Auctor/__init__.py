@@ -1,4 +1,4 @@
-"""Auctor: filesystem, parsing, terminal, and logging utilities."""
+"""Auctor: A standalone utility library for diagnostics, filesystem operations, data processing, and terminal interaction."""
 
 from .environment import EnvironmentDefaults
 from .Runtime import initialize_auctor, is_auctor_initialized, shutdown_auctor

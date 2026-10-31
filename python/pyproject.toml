@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "Auctor"
 dynamic = ["version"]
-description = "Auctor: Filesystem, parsing, terminal, and logging utilities."
+description = "Auctor: A standalone utility library for diagnostics, filesystem operations, data processing, and terminal interaction."
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [
     { name = "nomad_ii_damon" }

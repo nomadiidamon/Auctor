@@ -1,6 +1,6 @@
 # Auctor
 
-Auctor is a standalone library of reusable logging, filesystem, parsing, and terminal utilities. It separates these responsibilities into components that can be used independently and is designed around a shared semantic contract with idiomatic Python and C++ implementations.
+Auctor: A standalone utility library for diagnostics, filesystem operations, data processing, and terminal interaction. It separates these responsibilities into components that can be used independently and is designed around a shared semantic contract for Python and C++ implementations
 
 Auctor was developed by extracting common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI), but it has no dependency on that project or its application-specific policies.
 

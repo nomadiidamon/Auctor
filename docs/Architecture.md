@@ -1,6 +1,6 @@
 # Auctor Architecture
 
-Auctor is a standalone utility library for filesystem operations, data interpretation, terminal interaction, and diagnostics. Its components have distinct responsibilities so applications can use them independently and implementations can evolve without importing application-specific policy.
+Auctor: A standalone utility library for diagnostics, filesystem operations, data processing, and terminal interaction. Its components have distinct responsibilities so applications can use them independently and implementations can evolve without importing application-specific policy.
 
 ## Component map
 

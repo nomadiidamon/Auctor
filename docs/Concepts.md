@@ -1,6 +1,6 @@
 # Auctor Concepts
 
-Auctor is a standalone mechanism library: it provides reusable operations without taking ownership of an application's domain model, configuration meaning, or policy. It was developed by extracting common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI), but does not require Domus-AI.
+Auctor: A standalone utility library for diagnostics, filesystem operations, data processing, and terminal interaction. It provides reusable operations without taking ownership of an application's domain model, configuration meaning, or policy. It was developed by extracting common logic from [Domus-AI](https://github.com/nomadiidamon/Domus-AI), but does not require Domus-AI.
 
 ## One contract, idiomatic implementations
 
